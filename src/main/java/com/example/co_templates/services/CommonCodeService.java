@@ -23,4 +23,15 @@ public class CommonCodeService {
 
         return itemList;
     }
+    public HashMap<String,Object> view(Integer pkId){
+        HashMap<String,Object> itemDetails = new HashMap<>();
+
+        String fkId = "FK_0382";
+        String name = "Commons";
+        itemDetails.put("PK_ID", pkId);
+        itemDetails.put("FK_ID", fkId);
+        itemDetails.put("NAME", name);
+
+        return itemDetails;
+    }
 }

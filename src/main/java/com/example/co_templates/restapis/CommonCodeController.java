@@ -27,15 +27,10 @@ public class CommonCodeController {
         return ResponseEntity.ok().body(itemList);
     }
 
-    @GetMapping("/commonCode/view/{pk_id}/{fk_id}/{name}")
-    public ResponseEntity<HashMap<String, Object>> view(@PathVariable("pk_id") Integer pkId,
-                                                        @PathVariable("fk_id") Integer fkId,
-                                                        @PathVariable("name") String name) {
+    @GetMapping("/r/commonCode/view/{pk_id}")
+    public ResponseEntity<HashMap<String, Object>> view(@PathVariable("pk_id") Integer pkId) {
         HashMap<String, Object> itemDetails = new HashMap<>();
-
-        itemDetails.put("PK_ID", pkId);
-        itemDetails.put("FK_ID", fkId);
-        itemDetails.put("NAME", name);
+        itemDetails = commonCodeService.view(pkId);
 
         return ResponseEntity.ok().body(itemDetails);
     }
