@@ -18,7 +18,7 @@ public class BoardController {
 
     @Autowired BoardService BoardService;
 
-    @GetMapping("/r/commonCode/mixed/{pageNumber}/{pk_id}")
+    @GetMapping("/q/r/board/mixed/{pageNumber}/{pk_id}")
     public ResponseEntity<HashMap<String, Object>> mixed(@PathVariable("pageNumber") String pageNumber,
             @PathVariable("pk_id") String pkId) {
         // call service
