@@ -11,7 +11,7 @@ public class BoardService {
     public ArrayList<HashMap<String, Object>> insert(String title, String contents) { 
         HashMap<String, Object> item = new HashMap<>();
         int number = this.itemList.size()+1;
-        int pk_id = number;
+        String pk_id = "PK_ID_"+ number;
         item.put("PK_ID", pk_id);
         item.put("TITLE", title);
         item.put("CONTENTS", contents);
@@ -22,15 +22,22 @@ public class BoardService {
     public ArrayList<HashMap<String, Object>> list(String pageNumber){
         return this.itemList;
     }
-    public HashMap<String, Object> view(int pk_id){
+    public HashMap<String, Object> view(String pk_id){
         HashMap<String,Object> itemDetails = new HashMap<>();
-                itemDetails = this.itemList.get(pk_id-1);
-            
+        for (int i = 0; i < this.itemList.size();i++){
+            if (this.itemList.get(i).get("PK_ID").equals(pk_id)){
+            itemDetails = this.itemList.get(i);
+        }
+    }
         
         return itemDetails;
     }
-    public ArrayList<HashMap<String, Object>> delete(int pk_id){
-            this.itemList.remove(pk_id-1);
+    public ArrayList<HashMap<String, Object>> delete(String pk_id){
+        for (int i = 0; i < this.itemList.size();i++){
+            if (this.itemList.get(i).get("PK_ID").equals(pk_id)){
+                this.itemList.remove(i);
+        }
+    }
         return this.itemList;
     }
 }
