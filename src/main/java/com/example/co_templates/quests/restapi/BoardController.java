@@ -18,6 +18,22 @@ public class BoardController {
 
     @Autowired BoardService BoardService;
 
+    @GetMapping("/r/commonCode/mixed/{pageNumber}/{pk_id}")
+    public ResponseEntity<HashMap<String, Object>> mixed(@PathVariable("pageNumber") String pageNumber,
+            @PathVariable("pk_id") String pkId) {
+        // call service
+        HashMap<String, Object> resultMap = new HashMap<>();
+        resultMap = BoardService.mixed(pageNumber, pkId);
+
+        // add request params 
+        HashMap<String, Object> requestParams = new HashMap<>();
+        requestParams.put("pageNumber", pageNumber);
+        requestParams.put("pk_id", pkId);
+        resultMap.put("requestParams", requestParams);
+
+        return ResponseEntity.ok().body(resultMap);
+    }
+
     @GetMapping("/q/r/board/list/{pageNumber}")
     public ResponseEntity<List<HashMap<String, Object>>> list(@PathVariable("pageNumber") String pageNumber) {
         ArrayList<HashMap<String, Object>> itemList = new ArrayList<HashMap<String, Object>>();
@@ -43,9 +59,8 @@ public class BoardController {
     }
     @GetMapping("q/r/board/delete/{pk_id}")
     public ResponseEntity<Integer> delete(@PathVariable("pk_id") String pkId) {
-        ArrayList<HashMap<String, Object>> itemList = new ArrayList<HashMap<String, Object>>();
-        itemList = BoardService.delete(pkId);
+        int delete_num = BoardService.delete(pkId);
 
-        return ResponseEntity.ok().body(itemList.size());
+        return ResponseEntity.ok().body(delete_num);
     }
 }

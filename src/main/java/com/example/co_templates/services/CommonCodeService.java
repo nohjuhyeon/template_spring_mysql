@@ -2,11 +2,19 @@ package com.example.co_templates.services;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import org.springframework.stereotype.Service;;
+
+import org.springframework.stereotype.Service;
 
 @Service
 public class CommonCodeService {
-    public ArrayList<HashMap<String, Object>> list(Integer pageNumber) {
+    public HashMap<String, Object> mixed(Integer pageNumber, Integer pkid){
+        HashMap<String, Object> resultMap = new HashMap<>();
+        resultMap.put("list", this.list(pageNumber));
+        resultMap.put("view", this.view(pkid));
+        return resultMap;
+    }
+
+    public ArrayList<HashMap<String, Object>> list(Integer pageNumber){
         ArrayList<HashMap<String, Object>> itemList = new ArrayList<HashMap<String, Object>>();
  
         HashMap<String, Object> item = new HashMap<>();
@@ -23,8 +31,9 @@ public class CommonCodeService {
 
         return itemList;
     }
-    public HashMap<String,Object> view(Integer pkId){
-        HashMap<String,Object> itemDetails = new HashMap<>();
+
+    public HashMap<String, Object> view(Integer pkId){
+        HashMap<String, Object> itemDetails = new HashMap<>();
 
         String fkId = "FK_0382";
         String name = "Commons";
