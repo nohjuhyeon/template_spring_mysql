@@ -12,12 +12,20 @@ import org.springframework.http.ResponseEntity;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 public class CommonCodeController {
 
     @Autowired
     CommonCodeService commonCodeService;
+
+    @GetMapping("/r/commonCode/callDao")
+    public void callDao(){
+        commonCodeService.callDao();
+        return ;
+    }
 
     @GetMapping("/r/commonCode/mixed/{pageNumber}/{pk_id}")
     public ResponseEntity<HashMap<String, Object>> mixed(@PathVariable("pageNumber") Integer pageNumber,
